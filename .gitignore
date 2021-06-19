@@ -1,0 +1,21 @@
+# IntelliJ IDEA
+.idea
+.run
+*.iml
+*.ipr
+*.iws
+/annotations
+/*/out/production/
+/*/out/test/
+
+# Gradle
+.gradle
+build
+local.properties
+
+.DS_Store
+
+#Java
+*.class
+*.log
+*.ctxt
