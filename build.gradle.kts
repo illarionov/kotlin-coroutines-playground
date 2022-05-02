@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.6.21"
     application
 }
 
@@ -33,7 +33,7 @@ application {
 dependencies {
     implementation("ch.qos.logback:logback-classic:1.0.13")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
-    val coroutines_version = "1.5.0"
+    val coroutines_version = "1.6.1"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk9:$coroutines_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutines_version")

@@ -26,10 +26,10 @@ fun `parent-корутина ждет своих child'ов`() = runBlocking {
 fun `withContext и отмены корутин, запущенных в других скоупах`() {
 
     // Репозиторий со своим скоупом.
-    class Repository: CoroutineScope {
+    class Repository : CoroutineScope {
         val job: Job = Job()
         override val coroutineContext: CoroutineContext
-            get() =  job + Dispatchers.IO
+            get() = job + Dispatchers.IO
 
         suspend fun getRandomNumberAfterDelay(): Float {
             log("getRandomNumber()")
