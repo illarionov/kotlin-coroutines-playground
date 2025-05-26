@@ -42,7 +42,7 @@ fun testAwaitOnDeferred() {
     }
 }
 
-fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel<Deferred<String>>) = produce<String> {
+fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel<Deferred<String>>): ReceiveChannel<String> = produce {
     var current = input.receive() // start with first received deferred value
     while (isActive) { // loop while not cancelled/closed
         val next = select<Deferred<String>?> { // return next deferred value from this select or null

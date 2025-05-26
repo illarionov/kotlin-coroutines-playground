@@ -1,7 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "2.1.21"
     application
 }
 
@@ -14,33 +15,40 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<KotlinCompile>() {
-    kotlinOptions {
-        jvmTarget = "11"
-        freeCompilerArgs += listOf(
-            "-Xopt-in=kotlin.time.ExperimentalTime",
-            "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-Xopt-in=kotlinx.coroutines.DelicateCoroutinesApi",
-            "-Xopt-in=kotlinx.coroutines.ObsoleteCoroutinesApi",
-        )
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 application {
     mainClass.set("MainKt")
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+        languageVersion = KotlinVersion.KOTLIN_1_9
+        apiVersion = KotlinVersion.KOTLIN_1_9
+        optIn.addAll(
+            "kotlin.time.ExperimentalTime",
+            "kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "kotlinx.coroutines.DelicateCoroutinesApi",
+            "kotlinx.coroutines.ObsoleteCoroutinesApi",
+        )
+    }
+}
+
+
 dependencies {
-    implementation("ch.qos.logback:logback-classic:1.0.13")
-    implementation("org.junit.jupiter:junit-jupiter:5.7.0")
-    val coroutines_version = "1.6.1"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk9:$coroutines_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutines_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:$coroutines_version")
+    implementation("ch.qos.logback:logback-classic:1.5.18")
+    implementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    val coroutinesVersion = "1.10.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk9:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:$coroutinesVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("app.cash.turbine:turbine:0.5.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.0")
+    testImplementation("app.cash.turbine:turbine:1.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
+    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
 }

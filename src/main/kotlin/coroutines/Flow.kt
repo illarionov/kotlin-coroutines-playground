@@ -151,7 +151,7 @@ fun `используем collectLatest чтобы получать только
 fun `разница между collect и catch`() {
     // onCompletion видит как upstream, так и downstream исключения (включая CancellationException) и при этом не
     // перехватывает и не обрабатывает их. Т.е. примерно добавляет finally блок в try { collecct{} }
-    // Catch - моэет использоваться для замены исключения на новый элемент
+    // Catch - может использоваться для замены исключения на новый элемент
     fun simple(): Flow<Int> = flow {
         for (i in 1..3) {
             delay(100) // pretend we are asynchronously waiting 100 ms
